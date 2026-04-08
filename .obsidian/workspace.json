@@ -1,0 +1,205 @@
+{
+  "main": {
+    "id": "dc5c64a2619fd5a9",
+    "type": "split",
+    "children": [
+      {
+        "id": "ee4f7bf9d8f509bf",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c4b88c256053c69f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "AI/OpenClaw/OpenClaw.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "OpenClaw"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8f4c43a9352af26d",
+    "type": "split",
+    "children": [
+      {
+        "id": "3ecbe64f75bb8e19",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1828180446c12c44",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "d15e7a431a92fa25",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "1d1b09e0fc062c1c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "74057c7b48f5f9fd",
+    "type": "split",
+    "children": [
+      {
+        "id": "861adc2242bb06d2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c45716d7f8c5c857",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "AI/OpenClaw/OpenClaw.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "OpenClaw 的反向链接列表"
+            }
+          },
+          {
+            "id": "00bb195ba78a25d9",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "AI/OpenClaw/OpenClaw.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "OpenClaw 的出链列表"
+            }
+          },
+          {
+            "id": "1a38536cb353b97a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "ba4f353434861eef",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "6f6bc7c93400cc6d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "AI/OpenClaw/OpenClaw.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "OpenClaw 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "c4b88c256053c69f",
+  "lastOpenFiles": [
+    "AI/OpenClaw.md",
+    "AI/OpenClaw/OpenClaw.md",
+    "AI/OpenClaw/图片/工作原理图.png",
+    "AI/OpenClaw/图片/关键能力.png",
+    "AI/OpenClaw/图片",
+    "AI/OpenClaw",
+    "AI/新建文件夹",
+    "AI/图片/关键能力.png",
+    "AI/图片/工作原理图.png",
+    "AI/图片",
+    "AI/关键能力.png",
+    "AI/工作原理图.png",
+    "欢迎.md",
+    "未命名",
+    "AI",
+    "创建链接.md"
+  ]
+}
