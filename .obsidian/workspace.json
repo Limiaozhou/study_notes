@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "ee4f7bf9d8f509bf",
+        "id": "15c10076d9cc26a7",
         "type": "tabs",
         "children": [
           {
-            "id": "c4b88c256053c69f",
+            "id": "ea15a07c91a3f4df",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -183,10 +183,12 @@
       "bases:新建数据库": false
     }
   },
-  "active": "c4b88c256053c69f",
+  "active": "ea15a07c91a3f4df",
   "lastOpenFiles": [
-    "AI/OpenClaw.md",
+    "AI技术.md",
     "AI/OpenClaw/OpenClaw.md",
+    "AI/OpenClaw/图片/引导方式.png",
+    "AI/OpenClaw.md",
     "AI/OpenClaw/图片/工作原理图.png",
     "AI/OpenClaw/图片/关键能力.png",
     "AI/OpenClaw/图片",
