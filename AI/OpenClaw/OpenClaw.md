@@ -100,6 +100,96 @@ OpenClaw 采用五大功能模块的微服务架构：
 - **Channels**: 连接各消息平台，提供统一消息接口
 - **Nodes**: 在用户设备上运行的传感器/端点，暴露设备能力
 
+### 架构术语说明
+
+```text
+用户/聊天软件/控制台/移动节点
+        ↓
+Channels
+        ↓
+Gateway：长驻进程、路由、认证、会话、WS/HTTP API
+        ↓
+Agent runtime：工作区、上下文、记忆、session、agent loop
+        ↓
+Model：LLM 推理
+        ↕
+Tools：执行动作
+        ↑
+Skills：给 agent 的工作说明
+Plugins：扩展 channels / tools / model providers / hooks / skills
+```
+
+* Channels: 聊天/通信入口
+  - 例如 Telegram、WhatsApp、Slack、Discord、Signal、iMessage、WebChat 等。每个 channel 通过 Gateway 接入，文本普遍支持，媒体和反应能力按平台不同。多个 channel 可以同时运行。
+* Gateway: OpenClaw 的长驻守护进程和控制平面
+  - 负责 channel/provider 连接、WebSocket/HTTP API、路由、认证、session、健康事件、插件路由、Control UI。默认本地端口是 127.0.0.1:18789。文档说它是 sessions、routing、channel connections 的 single source of truth。
+* Agent: 被 Gateway 调度的 AI 助手实例/“脑”
+  - 一个 agent 包含工作区、人格/说明文件、模型配置、认证资料、session 历史。默认是单 agent，也可以在一个 Gateway 中跑多个隔离 agent，并用 bindings 把不同 channel/account/peer 路由过去。
+* Tools: 模型可调用的结构化动作函数
+  - 如 exec、browser、web_search、message、image_generate、read/write/edit/apply_patch 等。工具让 agent 能读数据、改文件、发消息、操作浏览器或调用外部系统；只有通过策略过滤后的工具 schema 才会给模型看到。
+* Skills: 给 agent 的 Markdown 工作说明包
+  - 每个 skill 通常是一个目录里的 SKILL.md，包含 frontmatter 和正文，告诉 agent 何时、如何使用已有工具。它本身通常不新增能力，而是把流程、规范、检查清单注入 prompt。
+* Plugins: 可安装的运行时扩展代码包
+  - 插件可以新增 channels、model providers、tools、skills、hooks、语音、媒体生成、web search/fetch 等。来源可以是 ClawHub、npm、git、本地目录等。
+* Model: agent 使用的大语言模型/推理后端
+  - OpenClaw 用 provider/model 形式配置模型，例如 openai/gpt-5.5、anthropic/claude-opus-4-6。模型 provider 负责认证、模型目录和调用方式；OpenClaw 负责把上下文、技能、工具定义送入模型并执行工具循环。
+
+总结: Tool 是“能做什么动作”，Skill 是“怎么做这类工作”，Plugin 是“给系统装上新能力”，Model 是“负责推理和决策的大脑”，Gateway 是“把所有这些接起来的中枢”。
+
+### 与 codex 对比
+OpenClaw 更像“自托管 AI agent 网关/路由器”：把 WhatsApp、Telegram、Slack、Discord、WebChat 等入口统一接到 agent。Codex 更像“OpenAI 官方 coding agent 产品/运行时”：重点在读代码、改代码、跑测试、代码审查、并行开发任务。两者不是完全同类，OpenClaw 甚至可以把 Codex 当作底层 agent runtime 来用。
+
+```text
+OpenClaw:
+聊天软件/节点/网页 → Gateway → agent runtime → model + tools + skills/plugins → 回到各聊天 channel
+
+Codex:
+Codex app/CLI/IDE/web → 本地或云端工作区 → Codex agent/runtime → coding model + tools → diff/PR/测试结果
+```
+
+#### 核心定位对比
+| 维度 | OpenClaw | Codex |
+| --- | --- | --- |
+| 产品定位 | 自托管、多渠道 AI agent Gateway | OpenAI 官方软件开发 agent |
+| 第一入口 | 聊天软件、WebChat、移动/桌面节点、CLI、Control UI | Codex app、CLI、IDE extension、Codex web |
+| 核心价值 | “随时从任意聊天入口唤起自己的 agent” | “在代码库里高质量完成开发、审查、调试、重构” |
+| 部署方式 | 自己运行 Gateway，默认本地 127.0.0.1:18789 | 本地 app/CLI/IDE，也有 Codex Cloud |
+| 扩展重点 | channel、provider、tool、skill、hook、agent harness | skills、plugins、MCP、shell/browser/computer-use、cloud tasks |
+| 模型选择 | 多 provider，常用 provider/model，如 openai/gpt-5.5、anthropic/... | 官方推荐 Codex 模型，如 gpt-5.5，本地可配置模型；云端任务默认模型当前不可改 |
+| 是否开源 | OpenClaw 是开源自托管项目 | Codex CLI/app-server 等组件开源，但 Codex 产品和模型是 OpenAI 托管体系的一部分 |
+| 最适合   | 个人/团队想把 AI 助手接入各种聊天渠道 | 开发者想在 repo 内完成真实工程任务 |
+
+#### 概念逐项映射
+| OpenClaw 概念 | 在 OpenClaw 中 | Codex 中的近似物 | 关键差异 |
+| --- | --- | --- | --- |
+| Channels | Telegram、WhatsApp、Slack、Discord、Signal、iMessage、WebChat 等聊天入口，每个 channel 经 Gateway 接入 | Codex 没有同等“多聊天 channel”核心概念；它有 app/CLI/IDE/web，以及 GitHub/Slack/Linear 等集成 | OpenClaw 的 channel 是主战场；Codex 的入口主要围绕代码工作流 |
+| Gateway | 长驻守护进程，负责 channel 连接、WebSocket API、路由、认证、session、节点、Control UI | Codex 有 app-server，为 rich clients 提供认证、历史、审批、流式事件 | OpenClaw Gateway 是多渠道中枢；Codex app-server 是 Codex 客户端集成协议，不负责 WhatsApp/Telegram 这类消息路由 |
+| Agent | 	OpenClaw agent runtime 管理 workspace、session、bootstrap files、tools、skills、model routing | Codex 本身就是 coding agent，可读写代码、运行命令、审查、调试、自动化开发任务 | OpenClaw 的 agent 更“通用消息助手”；Codex agent 更“工程开发专家” |
+| Tools | typed function，如 exec、browser、web_search、message、image_generate、apply_patch 等 | shell、apply patch、web search、MCP、computer use、browser、code tools 等 | shell、apply patch、web search、MCP、computer use、browser、code tools 等 |
+| Skills | SKILL.md 指令包，教 agent 何时和如何使用工具 | Codex skills 也是 instructions/resources/scripts 的可复用工作流格式 | Codex skills 也是 instructions/resources/scripts 的可复用工作流格式 |
+| Plugins | 可新增 channels、model providers、agent harnesses、tools、skills、hooks、语音、媒体、搜索等 | Codex plugins 打包 skills、app integrations、MCP servers | OpenClaw plugin 更底层、更运行时；Codex plugin 更像可安装的工作流/应用连接包 |
+| Model | 多 provider 模型引用，provider/model | Codex 推荐 OpenAI coding models，本地可指定模型，Cloud 当前默认不可改 | OpenClaw 更 provider-agnostic；Codex 更深度绑定 OpenAI coding model 体验 |
+
+#### 最重要的架构差别
+OpenClaw 的中心是 Gateway。官方文档说它是 sessions、routing、channel connections 的 single source of truth，并且一个 Gateway 管理 WhatsApp、Telegram、Slack、Discord、Signal、iMessage、WebChat 等消息面。也就是说，它解决的是“我从哪里和 agent 对话、怎么路由到正确 agent、怎么回到原聊天平台”。
+
+Codex 的中心是 coding agent runtime/client surface。官方定义 Codex 是 OpenAI 的软件开发 coding agent，可写代码、理解代码库、审查、调试、自动化开发任务；CLI 可在本机目录读写和运行代码，Codex web 可在云端后台并行执行任务。
+
+#### 二者可以组合
+OpenClaw 文档明确有 bundled codex plugin，可以让 OpenClaw 通过 Codex app-server 运行 OpenAI agent turns。此时边界大致是：
+
+```text
+Telegram/WhatsApp/Slack
+        ↓
+OpenClaw Gateway：channel、路由、会话镜像、媒体投递、OpenClaw 工具/审批
+        ↓
+Codex app-server：Codex thread、native tool continuation、native compaction、底层 agent execution
+        ↓
+OpenAI model，如 gpt-5.5
+```
+
+openai/gpt-5.5 是 model ref，codex 是 runtime，Telegram/Discord/Slack 等仍然是 communication surface。
+
 ## 功能
 ### 亮点
 ![关键能力](图片/关键能力.png)
