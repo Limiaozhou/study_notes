@@ -4,22 +4,47 @@
     "type": "split",
     "children": [
       {
-        "id": "15c10076d9cc26a7",
+        "id": "23fdb468f981ce38",
         "type": "tabs",
+        "dimension": 82.97213622291022,
         "children": [
           {
-            "id": "ea15a07c91a3f4df",
+            "id": "d7193b73875ab6d9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AI/AI技术.md",
-                "mode": "source",
+                "file": "AI/OpenClaw/OpenClaw.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "AI技术"
-            }
+              "title": "OpenClaw"
+            },
+            "group": "31e6e045d63e1645"
+          }
+        ]
+      },
+      {
+        "id": "9d09e65e14d8944c",
+        "type": "tabs",
+        "dimension": 17.027863777089784,
+        "children": [
+          {
+            "id": "eaabdbe2f6b77100",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "AI/OpenClaw/OpenClaw.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "OpenClaw 的大纲"
+            },
+            "group": "31e6e045d63e1645"
           }
         ]
       }
@@ -78,7 +103,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "right": {
     "id": "74057c7b48f5f9fd",
@@ -94,7 +119,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "AI/AI技术.md",
+                "file": "AI/OpenClaw/OpenClaw.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +129,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "AI技术 的反向链接列表"
+              "title": "OpenClaw 的反向链接列表"
             }
           },
           {
@@ -151,7 +176,7 @@
             }
           },
           {
-            "id": "6f6bc7c93400cc6d",
+            "id": "20b6e43616187eef",
             "type": "leaf",
             "state": {
               "type": "outline",
@@ -183,11 +208,16 @@
       "bases:新建数据库": false
     }
   },
-  "active": "1828180446c12c44",
+  "active": "eaabdbe2f6b77100",
   "lastOpenFiles": [
-    "AI/OpenClaw/OpenClaw.md",
     "AI/AI技术.md",
+    "AI/OpenClaw/OpenClaw.md",
+    "图片.md",
     "AI/OpenClaw/图片/引导方式.png",
+    "AI/OpenClaw/图片/咨询openclaw使用telegram-1.png",
+    "AI/OpenClaw/图片/咨询openclaw使用telegram-2.png",
+    "AI/OpenClaw/图片/咨询openclaw使用telegram-3.png",
+    "AI/OpenClaw/图片/dashboard显示.png",
     "AI/OpenClaw.md",
     "AI/OpenClaw/图片/工作原理图.png",
     "AI/OpenClaw/图片/关键能力.png",
@@ -198,7 +228,6 @@
     "AI/图片/工作原理图.png",
     "AI/图片",
     "AI/关键能力.png",
-    "AI/工作原理图.png",
     "欢迎.md",
     "未命名",
     "AI",
